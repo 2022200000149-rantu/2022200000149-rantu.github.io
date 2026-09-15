@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>rantusamadder.github.io</title>
+  <meta name="description" content="Portfolio of Rantu Samadder — Student, CSE." />
+
+  <!-- Website Favicon -->
+  <link rel="icon" type="image/png" href="assets/profile.jpg" />
+  <link rel="apple-touch-icon" href="assets/profile.jpg" />
+
+  <style>
+    :root {
+      --accent: #60a5fa;
+      --muted: #94a3b8;
+      --text: #e6eef8;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 70px; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial;
+      margin: 0;
+      background: linear-gradient(180deg, #0b1220 0%, #071029 100%);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
+
+    /* ===== Header ===== */
+    .site-header {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-title { font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+    .site-title:hover { color: var(--accent); }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-toggle { display: none; background: none; border: none; color: var(--accent); font-size: 24px; cursor: pointer; transition: transform 0.2s ease; }
+    .menu-toggle:hover { transform: scale(1.2); }
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #0a1b2f;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+      }
+      .nav-links.show { display: flex; opacity: 1; transform: translateY(0); }
+      .menu-toggle { display: block; }
+    }
+
+    /* ===== Main Layout ===== */
+    .avatar { 
+      width: 140px; height: 140px; border-radius: 12px; overflow: hidden; 
+      border: 4px solid rgba(255,255,255,0.06); 
+      display: flex; align-items: center; justify-content: center; 
+      background: linear-gradient(135deg, #0b1220, #0a1b2f); 
+      margin: 0 auto 16px auto; /* Center the avatar */
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .initials { width: 100%; height: 100%; display: none; align-items: center; justify-content: center; font-weight: 700; font-size: 48px; border-radius: 12px; background: linear-gradient(135deg, #1f2937, #111827); color: var(--text); }
+    header .header-left { text-align: center; } /* Center all header content */
+    h1 { font-size: 28px; margin: 0; }
+    h2 { font-size: 20px; margin: 8px 0; color: var(--accent); }
+    .lead { color: var(--muted); margin-top: 6px; }
+    .socials { display: flex; gap: 8px; margin-top: 8px; justify-content: center; }
+    .socials a { color: var(--text); text-decoration: none; padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.02); font-size: 14px; }
+    section { margin-top: 24px; padding: 18px; background: rgba(255, 255, 255, 0.02); border-radius: 12px; }
+    section p { overflow: visible; white-space: normal; word-wrap: break-word; text-align: left; }
+    .centered { text-align: center; }
+    .grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+    @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } .avatar { width: 110px; height: 110px; } .container { padding: 12px; } }
+    .timeline { position: relative; padding-left: 18px; margin: 0 auto; max-width: 600px; text-align: left; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), transparent); }
+    .timeline-item { position: relative; padding: 12px 0 12px 18px; }
+    .timeline-item .dot { position: absolute; left: -2px; top: 12px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(96,165,250,0.08); }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; justify-content: center; }
+    @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+    .card { padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); text-align: center; transition: all 0.3s ease; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .pub-list { list-style: none; padding: 0; margin: 0; }
+    .pub-list li { padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.03); }
+    .footer { opacity: 0.8; color: var(--muted); font-size: 13px; margin-top: 14px; text-align: center; }
+    a.cta { display: inline-block; padding: 10px 14px; background: var(--accent); color: #04203a; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+    a.cta:hover { background: #04203a; color: var(--accent); transform: scale(1.05); }
+    main, main section { text-align: center; }
+    #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+    /* Robot + Chatbot combined */
+    #robot-chat-container { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    #robot { width: 300px; height: 300px; }
+    #chatbox { width: 300px; max-width: 100%; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+    #chat-messages { height: 200px; overflow-y: auto; background: rgba(0,0,0,0.1); padding: 8px; border-radius: 8px; }
+    #chat-messages p { margin: 4px 0; }
+    #chat-input { display: flex; gap: 6px; }
+    #chat-input input { flex: 1; padding: 6px; border-radius: 6px; border: none; }
+    #chat-input button { padding: 6px 12px; border-radius: 6px; border: none; background: var(--accent); color: #04203a; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="https://rantusamadder.github.io" class="site-title">rantusamadder.github.io</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Activities & Projects</a>
+        <a href="#awards">Awards</a>
+        <a href="#publications">Publications</a>
+        <a href="#quickinfo">Quick Info</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <header>
+      <div class="header-left">
+        <div class="avatar">
+          <img src="assets/profile.jpg" alt="Rantu Samadder"
+            onerror="this.style.display='none';document.getElementById('initials').style.display='flex'" />
+          <div id="initials" class="initials">RS</div>
+        </div>
+        <h1>Śrī Rāntū</h1>
+        <div class="lead">Computer Science & Engineering student • Rover Scout</div>
+        <div class="socials">
+          <a href="https://github.com/RantuSamadder" target="_blank">GitHub</a>
+          <a href="mailto:2022200000149@seu.edu.bd">Email</a>
+          <a href="https://wa.me/1767556635">WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <!-- About Section -->
+        <section id="about">
+          <h2>About</h2>
+          <p>Hare Krishna, I am Shree Rantu Samadder, a Computer Science and Engineering student at Southeast University. I am passionate about learning, problem-solving, and applying technology to real-world challenges. My interests include numerical methods, data structures, and software development. Beyond academics, I am active as a Rover Scout and serve as the IT Secretary of the Southeast Cultural Society, where I manage digital platforms and events. I also contribute as a Local Coordinator for the Messengers of Peace initiative. I enjoy building projects that combine technical knowledge with community impact.</p>
+          <p class="centered"><a class="cta" href="assets/CV.pdf" target="_blank">Download CV</a></p>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+          <h2>Education — timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <strong>Bachelor of Science — Computer Science & Engineering</strong><br />
+              <small class="lead">Southeast University, Dhaka - 1208 | 2022 – present</small>
+            </div>
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <strong>Higher Secondary Certificate (HSC)</strong><br />
+              <small class="lead">Birshreshtha Munshi Abdur Rouf Public College, Dhaka - 1205 | 2019 – 2021</small>
+            </div>
+            <div class="timeline-item">
+              <div class="dot"></div>
+              <strong>Secondary School Certificate (SSC)</strong><br />
+              <small class="lead">Armanitola Government High School, Dhaka - 1100 | 2014 – 2019</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+          <h2>Activities & Projects</h2>
+          <div class="cards">
+            <div class="card">
+              <strong>Project: Richardson Extrapolation on Trapezoidal Rule</strong>
+              <p>Implementation and explanation of Richardson Extrapolation for improving the accuracy of the Trapezoidal Rule, with comparison of results before and after extrapolation.</p>
+            </div>
+            <div class="card">
+              <strong>Coursework</strong>
+              <p>PHY181, ENG105, Data Structures etc.</p>
+            </div>
+            <div class="card">
+              <strong>IT Secretary</strong>
+              <p>Managing website, systems, and event registrations for Southeast Cultural Society.</p>
+            </div>
+            <div class="card">
+              <strong>Messengers of Peace</strong>
+              <p>Contributing as Local Coordinator under WOSM initiative.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section id="awards">
+          <h2>Awards</h2>
+          <ul>
+            <li>Dean's list, Southeast University — Year</li>
+            <li>Programming contest — Position, Year</li>
+          </ul>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications">
+          <h2>Publications</h2>
+          <ul class="pub-list">
+            <li><strong>Paper Title</strong> — Conference/Journal, Year. <a href="assets/paper1.pdf">PDF</a></li>
+            <li><strong>Article</strong> — Website/Blog, Year. <a href="https://example.com" target="_blank">Link</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <aside>
+        <section id="quickinfo">
+          <h2>Quick Info</h2>
+          <p><strong>ID:</strong> 2022200000149</p>
+          <p><strong>Dept:</strong> Computer Science and Engineering (CSE)</p>
+        </section>
+
+        <!-- Robot + Chatbot Section -->
+        <section id="robot-animation" class="centered">
+          <h2>Meet My Robot 🤖</h2>
+          <div id="robot-chat-container">
+            <div id="robot"></div>
+            <div id="chatbox">
+              <div id="chat-messages"></div>
+              <div id="chat-input">
+                <input type="text" id="user-input" placeholder="Ask me something..." />
+                <button id="send-btn">Send</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="footer">© 2025 Rantu Samadder</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    document.getElementById("menuToggle").addEventListener("click", () => {
+      document.getElementById("navLinks").classList.toggle("show");
+    });
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => document.getElementById("navLinks").classList.remove("show"));
+    });
+
+    // Particles.js
+    particlesJS("particles-js", {
+      particles: { number: { value: 80 }, color: { value: "#60a5fa" }, shape: { type: "circle" }, opacity: { value: 0.5 }, size: { value: 3 },
+        line_linked: { enable: true, distance: 120, color: "#60a5fa", opacity: 0.3, width: 1 }, move: { enable: true, speed: 2 }
+      },
+      interactivity: { events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } } },
+      retina_detect: true,
+    });
+
+    // Robot Animation
+    lottie.loadAnimation({
+      container: document.getElementById('robot'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'assets/robot.json'
+    });
+
+    // === Advanced Chatbot ===
+    const chatMessages = document.getElementById('chat-messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    const knowledgeBase = [
+      { questions: ["about","who are you","introduce yourself","bio","background"], answer: "I am Shree Rantu Samadder, a Computer Science & Engineering student at Southeast University. I am passionate about programming, problem-solving, numerical methods, and software development. I am also a Rover Scout, IT Secretary of Southeast Cultural Society, and Local Coordinator for the Messengers of Peace initiative." },
+      { questions: ["ssc","secondary school","high school"], answer: "SSC: Armanitola Government High School | 2014 – 2019" },
+      { questions: ["hsc","higher secondary","college"], answer: "HSC: Birshreshtha Munshi Abdur Rouf Public College | 2019 – 2021" },
+      { questions: ["bsc","university","bachelor","bachelor of science"], answer: "BSc: Southeast University | Computer Science & Engineering | 2022 – present" },
+      { questions: ["education","study","school","college","university","timeline"], answer: "My full education timeline: SSC at Armanitola Government High School (2014–2019), HSC at Birshreshtha Munshi Abdur Rouf Public College (2019–2021), BSc in Computer Science & Engineering at Southeast University (2022–present)." },
+      { questions: ["activities","projects","work","experience"], answer: "My activities and projects include: 1) Richardson Extrapolation on Trapezoidal Rule project. 2) Coursework (PHY181, ENG105, Data Structures etc.). 3) IT Secretary of Southeast Cultural Society. 4) Messengers of Peace initiative." },
+      { questions: ["richardson extrapolation","trapezoidal rule project","project"], answer: "I implemented and explained Richardson Extrapolation for the Trapezoidal Rule to improve numerical integration accuracy." },
+      { questions: ["coursework","courses","subjects"], answer: "My coursework includes PHY181, ENG105, Data Structures, and other Computer Science & Engineering courses." },
+      { questions: ["it secretary","cultural society","website management","event management"], answer: "As IT Secretary of Southeast Cultural Society, I manage the website, digital platforms, and registration for events." },
+      { questions: ["messengers of peace","wosm","peace initiative"], answer: "I contribute as Local Coordinator for the Messengers of Peace initiative, organized under WOSM (World Organization of the Scout Movement)." },
+      { questions: ["awards","achievements","honors","recognition","prizes"], answer: "Awards include Dean's List recognition at Southeast University and participation in programming contests." },
+      { questions: ["publications","papers","articles","research","blogs","pdfs"], answer: "My publications include research papers and articles. Examples: Paper Title — Conference/Journal, Year (PDF available), and other articles on websites/blogs (links available)." },
+      { questions: ["contact","email","github","whatsapp","reach","message"], answer: "You can reach me via GitHub (https://github.com/RantuSamadder), email (2022200000149@seu.edu.bd), or WhatsApp (+8801767556635). Links are available on my portfolio." },
+      { questions: ["quick info","id","department","personal info","details"], answer: "Quick Info: ID: 2022200000149, Department: Computer Science & Engineering (CSE)." },
+      { questions: ["rover scout","scouting","scout activities"], answer: "I am active as a Rover Scout, engaging in leadership programs, community service, and outdoor activities." },
+      { questions: ["default"], answer: "I’m not sure about that. You can ask me about my education, projects, awards, publications, contact info, Rover Scout activities, IT Secretary work, or Messengers of Peace involvement." }
+    ];
+
+    function getChatResponse(input) {
+      input = input.toLowerCase();
+      let matched = "";
+      knowledgeBase.forEach(item => { item.questions.forEach(q => { if(input.includes(q)) matched = item.answer; }); });
+      return matched || "Sorry, I didn't understand. Try asking about my education, projects, or contact info.";
+    }
+
+    function addMessage(sender, text) {
+      const p = document.createElement('p');
+      p.textContent = (sender==='user'? "You: ":"Rantu: ") + text;
+      chatMessages.appendChild(p);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const input = userInput.value.trim();
+      if(!input) return;
+      addMessage('user', input);
+      setTimeout(() => addMessage('bot', getChatResponse(input)), 300);
+      userInput.value = '';
+    });
+    userInput.addEventListener('keypress', e => { if(e.key==='Enter') sendBtn.click(); });
+  </script>
+</body>
+</html>
